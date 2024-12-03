@@ -12,9 +12,11 @@ mp_face_detection = mp.solutions.face_detection
 
 def detect_face(frame):
     # 剔除掉多个人脸、大角度侧脸（鼻子不在两个眼之间）、部分人脸框在画面外、人脸像素低于80*80的
-    with mp_face_detection.FaceDetection(
-            model_selection=1, min_detection_confidence=0.5) as face_detection:
-        results = face_detection.process(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    with mp_face_detection.FaceDetection(model_selection=0, min_detection_confidence=0.3) as face_detection:
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        # cv2.imwrite("output.jpg", image)
+        results = face_detection.process(image)
+        # print(f"Frame: {results.detections}")
         if not results.detections or len(results.detections) > 1:
             return -1, None
         rect = results.detections[0].location_data.relative_bounding_box
@@ -163,6 +165,7 @@ def CirculateVideo(video_in_path, video_out_path, export_imgs = False):
     # exit()
     print("正向视频帧数：", frames)
     pts_3d = ExtractFromVideo(front_video_path)
+    print("pts_3d: ", pts_3d)
     if type(pts_3d) is np.ndarray and len(pts_3d) == frames:
         print("关键点已提取")
     pts_3d = np.concatenate([pts_3d, pts_3d[::-1]], axis=0)
