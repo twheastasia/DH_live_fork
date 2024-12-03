@@ -1,4 +1,12 @@
 # Real-time Live Streaming Digital Human
+
+# 这个代码可以在苹果M1芯片上运行
+# 在执行命令时还需要加上一个环境变量设置，否则会报如下错误
+```
+The operator 'aten::grid_sampler_3d' is not currently implemented for the MPS device. If you want this op to be added in priority during the prototype phase of this feature, please comment on https://github.com/pytorch/pytorch/issues/77764. As a temporary fix, you can set the environment variable `PYTORCH_ENABLE_MPS_FALLBACK=1` to use the CPU as a fallback for this op. WARNING: this will be slower than running natively on MPS.
+```
+
+
 # 实时直播数字人  [bilibili video](https://www.bilibili.com/video/BV1Ppv1eEEgj/?vd_source=53601feee498369e726af7dbc2dae349)
 ### News
 Audio Model training code released！Details can be found [here](https://github.com/kleinlee/DH_live/tree/master/train_audio).
